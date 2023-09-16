@@ -1,0 +1,43 @@
+.owl-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.owl-nav button {
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  /* Adjust the font size as needed */
+  margin: 0 10px;
+  /* Adjust the margin as needed */
+  cursor: pointer;
+}
+
+.owl-nav button.owl-prev {
+  color: #000;
+  
+  /* Adjust the color as needed */
+
+}
+
+.owl-nav button.owl-next {
+  color: #000;
+  /* Adjust the color as needed */
+}
+
+.owl-dots {
+  text-align: center;
+}
+.owl-dots .owl-dot {
+  margin: 3px;
+  padding: 5px;
+  border-radius: 7px;
+  
+}
+.owl-dots .owl-dot:hover {
+  background-color: rgb(101, 138, 138);
+}
