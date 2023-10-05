@@ -133,14 +133,13 @@ const footer = () => {
                 >
                     <p className="m-0 text-center text-white">
                         &copy;
-                        <a className="text-primary font-weight-bold" href="/">Your Site Name</a>.
+                        <a className="text-primary font-weight-bold" href="/">KidKinderGarten</a>.
                         All Rights Reserved.
-                        Designed by
-                        <a className="text-primary font-weight-bold" href="https://htmlcodex.com"
-                        >HTML Codex</a
-                        >
-                        <br />Distributed By:
-                        <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                        Designed by <cite> 
+                        <a className="text-primary font-weight-bold" href="https://github.com/jasim1205"
+                        >MD.JASIM UDDIN</a>
+                        </cite>
+                        
                     </p>
                 </div>
             </div>

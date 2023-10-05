@@ -1,10 +1,76 @@
-import React from "react";
+import React,{useState, useEffect} from "react";
 import Header from '../Header/header';
 import Footer from '../Footer/footer';
 import TestimonialCarousel from "../Carousel/carousel";
+import { HomeTeacher } from "../../api/teachers";
+import { HomeBlog } from "../../api/blog";
+import { Class } from "../../api/classes";
+import { Abouts } from "../../api/about";
 
 
 const Home = () => {
+    const [hometeachersData, setHometeashersData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await HomeTeacher();
+        setHometeashersData(data);
+
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+    const [homeblogsData, setHomeblogsData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await HomeBlog();
+        setHomeblogsData(data);
+
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+  const [ classesData, setClassesData]=useState([]);
+    useEffect(()=>{
+        const fetchData = async ()=>{
+            try{
+                const data = await Class();
+                setClassesData(data);
+            }catch(error){
+                console.error(error.message);
+            }
+        };
+        fetchData();
+    }, []);
+
+    const [aboutsData, setAboutsData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await Abouts();
+        setAboutsData(data);
+
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+
+    fetchData();
+  }, []);
     return (
         <div>
             <div>
@@ -38,108 +104,23 @@ const Home = () => {
                 <div className="container-fluid pt-5">
                     <div className="container pb-3">
                         <div className="row">
-                            <div className="col-lg-4 col-md-6 pb-1">
+                        {aboutsData.map((about, index)=>(
+                            <div className="col-lg-4 col-md-6 pb-1" key={index}>
                                 <div
                                     className="d-flex bg-light shadow-sm border-top rounded mb-4"
                                     style={{ padding: '30px' }}
                                 >
                                     <i
-                                        className="flaticon-050-fence h1 font-weight-normal text-primary mb-3"
+                                        className={`${about.image} h1 font-weight-normal text-primary mb-3`}
                                     ></i>
                                     <div className="pl-4">
-                                        <h4>Play Ground</h4>
-                                        <p className="m-0">
-                                            Kasd labore kasd et dolor est rebum dolor ut, clita dolor vero
-                                            lorem amet elitr vero...
+                                        <h4>{about.title}</h4>
+                                        <p className="m-0">{about.description}
                                         </p>
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-lg-4 col-md-6 pb-1">
-                                <div
-                                    className="d-flex bg-light shadow-sm border-top rounded mb-4"
-                                    style={{ padding: '30px' }}
-                                >
-                                    <i
-                                        className="flaticon-022-drum h1 font-weight-normal text-primary mb-3"
-                                    ></i>
-                                    <div className="pl-4">
-                                        <h4>Music and Dance</h4>
-                                        <p className="m-0">
-                                            Kasd labore kasd et dolor est rebum dolor ut, clita dolor vero
-                                            lorem amet elitr vero...
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-lg-4 col-md-6 pb-1">
-                                <div
-                                    className="d-flex bg-light shadow-sm border-top rounded mb-4"
-                                    style={{ padding: '30px' }}
-                                >
-                                    <i
-                                        className="flaticon-030-crayons h1 font-weight-normal text-primary mb-3"
-                                    ></i>
-                                    <div className="pl-4">
-                                        <h4>Arts and Crafts</h4>
-                                        <p className="m-0">
-                                            Kasd labore kasd et dolor est rebum dolor ut, clita dolor vero
-                                            lorem amet elitr vero...
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-lg-4 col-md-6 pb-1">
-                                <div
-                                    className="d-flex bg-light shadow-sm border-top rounded mb-4"
-                                    style={{ padding: '30px' }}
-                                >
-                                    <i
-                                        className="flaticon-017-toy-car h1 font-weight-normal text-primary mb-3"
-                                    ></i>
-                                    <div className="pl-4">
-                                        <h4>Safe Transportation</h4>
-                                        <p className="m-0">
-                                            Kasd labore kasd et dolor est rebum dolor ut, clita dolor vero
-                                            lorem amet elitr vero...
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-lg-4 col-md-6 pb-1">
-                                <div
-                                    className="d-flex bg-light shadow-sm border-top rounded mb-4"
-                                    style={{ padding: '30px' }}
-                                >
-                                    <i
-                                        className="flaticon-025-sandwich h1 font-weight-normal text-primary mb-3"
-                                    ></i>
-                                    <div className="pl-4">
-                                        <h4>Healthy food</h4>
-                                        <p className="m-0">
-                                            Kasd labore kasd et dolor est rebum dolor ut, clita dolor vero
-                                            lorem amet elitr vero...
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-lg-4 col-md-6 pb-1">
-                                <div
-                                    className="d-flex bg-light shadow-sm border-top rounded mb-4"
-                                    style={{ padding: '30px' }}
-                                >
-                                    <i
-                                        className="flaticon-047-backpack h1 font-weight-normal text-primary mb-3"
-                                    ></i>
-                                    <div className="pl-4">
-                                        <h4>Educational Tour</h4>
-                                        <p className="m-0">
-                                            Kasd labore kasd et dolor est rebum dolor ut, clita dolor vero
-                                            lorem amet elitr vero...
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                        ))}
                         </div>
                     </div>
                 </div>
@@ -205,14 +186,15 @@ const Home = () => {
                             <h1 className="mb-4">Class for Your Kids</h1>
                         </div>
                         <div className="row">
-                            <div className="col-lg-4 mb-5">
+                        {classesData.map((classes, index) => (
+                            <div className="col-lg-4 mb-5" key={index}>
                                 <div className="card border-0 bg-light shadow-sm pb-2">
-                                    <img className="card-img-top mb-2" src="assets/img/class-1.jpg" alt="" />
+                                    <img className="card-img-top mb-2" src={classes.image} alt="" />
                                     <div className="card-body text-center">
-                                        <h4 className="card-title">Drawing className</h4>
+                                        <h4 className="card-title">{classes.className}</h4>
                                         <p className="card-text">
-                                            Justo ea diam stet diam ipsum no sit, ipsum vero et et diam
-                                            ipsum duo et no et, ipsum ipsum erat duo amet clita duo
+                                        {classes.description}
+                                            
                                         </p>
                                     </div>
                                     <div className="card-footer bg-transparent py-4 px-5">
@@ -220,108 +202,31 @@ const Home = () => {
                                             <div className="col-6 py-1 text-right border-right">
                                                 <strong>Age of Kids</strong>
                                             </div>
-                                            <div className="col-6 py-1">3 - 6 Years</div>
+                                            <div className="col-6 py-1">{classes.age_of_kids}</div>
                                         </div>
                                         <div className="row border-bottom">
                                             <div className="col-6 py-1 text-right border-right">
                                                 <strong>Total Seats</strong>
                                             </div>
-                                            <div className="col-6 py-1">40 Seats</div>
+                                            <div className="col-6 py-1">{classes.total_seats}</div>
                                         </div>
                                         <div className="row border-bottom">
                                             <div className="col-6 py-1 text-right border-right">
                                                 <strong>className Time</strong>
                                             </div>
-                                            <div className="col-6 py-1">08:00 - 10:00</div>
+                                            <div className="col-6 py-1">{classes.class_time}</div>
                                         </div>
                                         <div className="row">
                                             <div className="col-6 py-1 text-right border-right">
                                                 <strong>Tution Fee</strong>
                                             </div>
-                                            <div className="col-6 py-1">$290 / Month</div>
+                                            <div className="col-6 py-1">${classes.tution_fees} / Month</div>
                                         </div>
                                     </div>
                                     <a href="" className="btn btn-primary px-4 mx-auto mb-4">Join Now</a>
                                 </div>
                             </div>
-                            <div className="col-lg-4 mb-5">
-                                <div className="card border-0 bg-light shadow-sm pb-2">
-                                    <img className="card-img-top mb-2" src="assets/img/class-2.jpg" alt="" />
-                                    <div className="card-body text-center">
-                                        <h4 className="card-title">Language Learning</h4>
-                                        <p className="card-text">
-                                            Justo ea diam stet diam ipsum no sit, ipsum vero et et diam
-                                            ipsum duo et no et, ipsum ipsum erat duo amet clita duo
-                                        </p>
-                                    </div>
-                                    <div className="card-footer bg-transparent py-4 px-5">
-                                        <div className="row border-bottom">
-                                            <div className="col-6 py-1 text-right border-right">
-                                                <strong>Age of Kids</strong>
-                                            </div>
-                                            <div className="col-6 py-1">3 - 6 Years</div>
-                                        </div>
-                                        <div className="row border-bottom">
-                                            <div className="col-6 py-1 text-right border-right">
-                                                <strong>Total Seats</strong>
-                                            </div>
-                                            <div className="col-6 py-1">40 Seats</div>
-                                        </div>
-                                        <div className="row border-bottom">
-                                            <div className="col-6 py-1 text-right border-right">
-                                                <strong>className Time</strong>
-                                            </div>
-                                            <div className="col-6 py-1">08:00 - 10:00</div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-6 py-1 text-right border-right">
-                                                <strong>Tution Fee</strong>
-                                            </div>
-                                            <div className="col-6 py-1">$290 / Month</div>
-                                        </div>
-                                    </div>
-                                    <a href="" className="btn btn-primary px-4 mx-auto mb-4">Join Now</a>
-                                </div>
-                            </div>
-                            <div className="col-lg-4 mb-5">
-                                <div className="card border-0 bg-light shadow-sm pb-2">
-                                    <img className="card-img-top mb-2" src="assets/img/class-3.jpg" alt="" />
-                                    <div className="card-body text-center">
-                                        <h4 className="card-title">Basic Science</h4>
-                                        <p className="card-text">
-                                            Justo ea diam stet diam ipsum no sit, ipsum vero et et diam
-                                            ipsum duo et no et, ipsum ipsum erat duo amet clita duo
-                                        </p>
-                                    </div>
-                                    <div className="card-footer bg-transparent py-4 px-5">
-                                        <div className="row border-bottom">
-                                            <div className="col-6 py-1 text-right border-right">
-                                                <strong>Age of Kids</strong>
-                                            </div>
-                                            <div className="col-6 py-1">3 - 6 Years</div>
-                                        </div>
-                                        <div className="row border-bottom">
-                                            <div className="col-6 py-1 text-right border-right">
-                                                <strong>Total Seats</strong>
-                                            </div>
-                                            <div className="col-6 py-1">40 Seats</div>
-                                        </div>
-                                        <div className="row border-bottom">
-                                            <div className="col-6 py-1 text-right border-right">
-                                                <strong>className Time</strong>
-                                            </div>
-                                            <div className="col-6 py-1">08:00 - 10:00</div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-6 py-1 text-right border-right">
-                                                <strong>Tution Fee</strong>
-                                            </div>
-                                            <div className="col-6 py-1">$290 / Month</div>
-                                        </div>
-                                    </div>
-                                    <a href="" className="btn btn-primary px-4 mx-auto mb-4">Join Now</a>
-                                </div>
-                            </div>
+                            ))}
                         </div>
                     </div>
                 </div>
@@ -419,12 +324,13 @@ const Home = () => {
                             <h1 className="mb-4">Meet Our Teachers</h1>
                         </div>
                         <div className="row">
-                            <div className="col-md-6 col-lg-3 text-center team mb-5">
+                            {hometeachersData.map((hometeacher,index)=>(
+                            <div className="col-md-6 col-lg-3 text-center team mb-5" key={index}>
                                 <div
                                     className="position-relative overflow-hidden mb-4"
                                     style={{ borderRadius: '100%' }}
                                 >
-                                    <img className="img-fluid w-100" src="assets/img/team-1.jpg" alt="" />
+                                    <img className="img-fluid w-100" src={hometeacher.image} alt="" />
                                     <div
                                         className="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute"
                                     >
@@ -448,199 +354,18 @@ const Home = () => {
                                         ></a>
                                     </div>
                                 </div>
-                                <h4>Julia Smith</h4>
-                                <i>Music Teacher</i>
+                                <h4>{hometeacher.name}</h4>
+                                <i>{hometeacher.designation}</i>
                             </div>
-                            <div className="col-md-6 col-lg-3 text-center team mb-5">
-                                <div
-                                    className="position-relative overflow-hidden mb-4"
-                                    style={{ borderRadius: '100%' }}
-                                >
-                                    <img className="img-fluid w-100" src="assets/img/team-2.jpg" alt="" />
-                                    <div
-                                        className="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute"
-                                    >
-                                        <a
-                                            className="btn btn-outline-light text-center mr-2 px-0"
-                                            style={{ width: '38px', height: '38px' }}
-                                            href="#"
-                                        ><i className="fab fa-twitter"></i
-                                        ></a>
-                                        <a
-                                            className="btn btn-outline-light text-center mr-2 px-0"
-                                            style={{ width: '38px', height: '38px' }}
-                                            href="#"
-                                        ><i className="fab fa-facebook-f"></i
-                                        ></a>
-                                        <a
-                                            className="btn btn-outline-light text-center px-0"
-                                            style={{ width: '38px', height: '38px' }}
-                                            href="#"
-                                        ><i className="fab fa-linkedin-in"></i
-                                        ></a>
-                                    </div>
-                                </div>
-                                <h4>Jhon Doe</h4>
-                                <i>Language Teacher</i>
-                            </div>
-                            <div className="col-md-6 col-lg-3 text-center team mb-5">
-                                <div
-                                    className="position-relative overflow-hidden mb-4"
-                                    style={{ borderRadius: '100%' }}
-                                >
-                                    <img className="img-fluid w-100" src="assets/img/team-3.jpg" alt="" />
-                                    <div
-                                        className="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute"
-                                    >
-                                        <a
-                                            className="btn btn-outline-light text-center mr-2 px-0"
-                                            style={{ width: '38px', height: '38px' }}
-                                            href="#"
-                                        ><i className="fab fa-twitter"></i
-                                        ></a>
-                                        <a
-                                            className="btn btn-outline-light text-center mr-2 px-0"
-                                            style={{ width: '38px', height: '38px' }}
-                                            href="#"
-                                        ><i className="fab fa-facebook-f"></i
-                                        ></a>
-                                        <a
-                                            className="btn btn-outline-light text-center px-0"
-                                            style={{ width: '38px', height: '38px' }}
-                                            href="#"
-                                        ><i className="fab fa-linkedin-in"></i
-                                        ></a>
-                                    </div>
-                                </div>
-                                <h4>Mollie Ross</h4>
-                                <i>Dance Teacher</i>
-                            </div>
-                            <div className="col-md-6 col-lg-3 text-center team mb-5">
-                                <div
-                                    className="position-relative overflow-hidden mb-4"
-                                    style={{ borderRadius: '100%' }}
-                                >
-                                    <img className="img-fluid w-100" src="assets/img/team-4.jpg" alt="" />
-                                    <div
-                                        className="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute"
-                                    >
-                                        <a
-                                            className="btn btn-outline-light text-center mr-2 px-0"
-                                            style={{ width: '38px', height: '38px' }}
-                                            href="#"
-                                        ><i className="fab fa-twitter"></i
-                                        ></a>
-                                        <a
-                                            className="btn btn-outline-light text-center mr-2 px-0"
-                                            style={{ width: '38px', height: '38px' }}
-                                            href="#"
-                                        ><i className="fab fa-facebook-f"></i
-                                        ></a>
-                                        <a
-                                            className="btn btn-outline-light text-center px-0"
-                                            style={{ width: '38px', height: '38px' }}
-                                            href="#"
-                                        ><i className="fab fa-linkedin-in"></i
-                                        ></a>
-                                    </div>
-                                </div>
-                                <h4>Donald John</h4>
-                                <i>Art Teacher</i>
-                            </div>
+                            ))}
+                            
                         </div>
                     </div>
                 </div>
                 {/* <!-- Team End --> */}
 
                 {/* <!-- Testimonial Start --> */}
-                {/* <div className="container-fluid py-5">
-                    <div className="container p-0">
-                        <div className="text-center pb-2">
-                            <p className="section-title px-5">
-                                <span className="px-2">Testimonial</span>
-                            </p>
-                            <h1 className="mb-4">What Parents Say!</h1>
-                        </div>
-                        <div className="owl-carousel testimonial-carousel">
-                            <div className="testimonial-item px-3">
-                                <div className="bg-light shadow-sm rounded mb-4 p-4">
-                                    <h3 className="fas fa-quote-left text-primary mr-3"></h3>
-                                    Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr
-                                    eirmod clita lorem. Dolor tempor ipsum clita
-                                </div>
-                                <div className="d-flex align-items-center">
-                                    <img
-                                        className="rounded-circle"
-                                        src="assets/img/testimonial-1.jpg"
-                                        style={{ width: '70px', height: '70px' }}
-                                        alt="Image"
-                                    />
-                                    <div className="pl-3">
-                                        <h5>Parent Name</h5>
-                                        <i>Profession</i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="testimonial-item px-3">
-                                <div className="bg-light shadow-sm rounded mb-4 p-4">
-                                    <h3 className="fas fa-quote-left text-primary mr-3"></h3>
-                                    Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr
-                                    eirmod clita lorem. Dolor tempor ipsum clita
-                                </div>
-                                <div className="d-flex align-items-center">
-                                    <img
-                                        className="rounded-circle"
-                                        src="assets/img/testimonial-2.jpg"
-                                        style={{ width: '70px', height: '70px' }}
-                                        alt="Image"
-                                    />
-                                    <div className="pl-3">
-                                        <h5>Parent Name</h5>
-                                        <i>Profession</i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="testimonial-item px-3">
-                                <div className="bg-light shadow-sm rounded mb-4 p-4">
-                                    <h3 className="fas fa-quote-left text-primary mr-3"></h3>
-                                    Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr
-                                    eirmod clita lorem. Dolor tempor ipsum clita
-                                </div>
-                                <div className="d-flex align-items-center">
-                                    <img
-                                        className="rounded-circle"
-                                        src="assets/img/testimonial-3.jpg"
-                                        style={{ width: '70px', height: '70px' }}
-                                        alt="Image"
-                                    />
-                                    <div className="pl-3">
-                                        <h5>Parent Name</h5>
-                                        <i>Profession</i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="testimonial-item px-3">
-                                <div className="bg-light shadow-sm rounded mb-4 p-4">
-                                    <h3 className="fas fa-quote-left text-primary mr-3"></h3>
-                                    Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr
-                                    eirmod clita lorem. Dolor tempor ipsum clita
-                                </div>
-                                <div className="d-flex align-items-center">
-                                    <img
-                                        className="rounded-circle"
-                                        src="assets/img/testimonial-4.jpg"
-                                        style={{ width: '70px', height: '70px' }}
-                                        alt="Image"
-                                    />
-                                    <div className="pl-3">
-                                        <h5>Parent Name</h5>
-                                        <i>Profession</i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
+                
                 <TestimonialCarousel />
 
                 {/* <!-- Testimonial End --> */}
@@ -655,11 +380,12 @@ const Home = () => {
                             <h1 className="mb-4">Latest Articles From Blog</h1>
                         </div>
                         <div className="row pb-3">
-                            <div className="col-lg-4 mb-4">
+                            {homeblogsData.map((homeblog,index)=>(
+                            <div className="col-lg-4 mb-4" key={index}>
                                 <div className="card border-0 shadow-sm mb-2">
-                                    <img className="card-img-top mb-2" src="assets/img/blog-1.jpg" alt="" />
+                                    <img className="card-img-top mb-2" src={homeblog.image} alt="" />
                                     <div className="card-body bg-light text-center p-4">
-                                        <h4 className="">Diam amet eos at no eos</h4>
+                                        <h4 className="">{homeblog.title}</h4>
                                         <div className="d-flex justify-content-center mb-3">
                                             <small className="mr-3"
                                             ><i className="fa fa-user text-primary"></i> Admin</small
@@ -671,10 +397,8 @@ const Home = () => {
                                             ><i className="fa fa-comments text-primary"></i> 15</small
                                             >
                                         </div>
-                                        <p>
-                                            Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam
-                                            eirmod, duo et sed sit eirmod kasd clita tempor dolor stet
-                                            lorem. Tempor ipsum justo amet stet...
+                                        <p>{homeblog.description}
+                                            
                                         </p>
                                         <a href="" className="btn btn-primary px-4 mx-auto my-2"
                                         >Read More</a
@@ -682,60 +406,7 @@ const Home = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-lg-4 mb-4">
-                                <div className="card border-0 shadow-sm mb-2">
-                                    <img className="card-img-top mb-2" src="assets/img/blog-2.jpg" alt="" />
-                                    <div className="card-body bg-light text-center p-4">
-                                        <h4 className="">Diam amet eos at no eos</h4>
-                                        <div className="d-flex justify-content-center mb-3">
-                                            <small className="mr-3"
-                                            ><i className="fa fa-user text-primary"></i> Admin</small
-                                            >
-                                            <small className="mr-3"
-                                            ><i className="fa fa-folder text-primary"></i> Web Design</small
-                                            >
-                                            <small className="mr-3"
-                                            ><i className="fa fa-comments text-primary"></i> 15</small
-                                            >
-                                        </div>
-                                        <p>
-                                            Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam
-                                            eirmod, duo et sed sit eirmod kasd clita tempor dolor stet
-                                            lorem. Tempor ipsum justo amet stet...
-                                        </p>
-                                        <a href="" className="btn btn-primary px-4 mx-auto my-2"
-                                        >Read More</a
-                                        >
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-lg-4 mb-4">
-                                <div className="card border-0 shadow-sm mb-2">
-                                    <img className="card-img-top mb-2" src="assets/img/blog-3.jpg" alt="" />
-                                    <div className="card-body bg-light text-center p-4">
-                                        <h4 className="">Diam amet eos at no eos</h4>
-                                        <div className="d-flex justify-content-center mb-3">
-                                            <small className="mr-3"
-                                            ><i className="fa fa-user text-primary"></i> Admin</small
-                                            >
-                                            <small className="mr-3"
-                                            ><i className="fa fa-folder text-primary"></i> Web Design</small
-                                            >
-                                            <small className="mr-3"
-                                            ><i className="fa fa-comments text-primary"></i> 15</small
-                                            >
-                                        </div>
-                                        <p>
-                                            Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam
-                                            eirmod, duo et sed sit eirmod kasd clita tempor dolor stet
-                                            lorem. Tempor ipsum justo amet stet...
-                                        </p>
-                                        <a href="" className="btn btn-primary px-4 mx-auto my-2"
-                                        >Read More</a
-                                        >
-                                    </div>
-                                </div>
-                            </div>
+                            ))};
                         </div>
                     </div>
                 </div>

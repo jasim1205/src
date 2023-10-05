@@ -76,9 +76,9 @@ const TestimonialCarousel = () => {
       <div className="container">
         <div class="text-center pb-2">
           <p class="section-title px-5">
-            <span class="px-2">Our Teachers</span>
+            <span class="px-2">Testimonial</span>
           </p>
-          <h1 class="mb-4">Meet Our Teachers</h1>
+          <h1 class="mb-4">What Parents Say!</h1>
         </div>
         <OwlCarousel {...options}>
           {testimonialsData.map((testimonials, index) => (
