@@ -69,7 +69,7 @@ function Attendance() {
     event.preventDefault();
     axios
       .post(
-        "http://localhost/react_api/Attendance/attendance_create.php",
+        `${ global.config.apiUrl}attendance/create`,
         inputs
       )
       .then(function (response) {
@@ -82,7 +82,8 @@ function Attendance() {
       <div className="container">
         <div className="row">
           <Sidebar />
-          <form onSubmit={handleSubmit} className="text-centen w-75">
+          <div className="col-md-9">
+            <form onSubmit={handleSubmit} className="text-centen w-75">
             <h1>Student Attendance</h1>
             <div className="row">
               <div className="col-sm-6">
@@ -155,6 +156,8 @@ function Attendance() {
               Save
             </button>
           </form>
+          </div>
+          
         </div>
       </div>
       <Footer />

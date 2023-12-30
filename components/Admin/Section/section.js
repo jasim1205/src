@@ -13,7 +13,7 @@ function Section() {
   }, []);
   function getDatas() {
     axios
-      .get("http://localhost/react_api/Section/section_list.php")
+      .get(`${global.config.apiUrl}section`)
       .then(function (response) {
         setSection(response.data.data);
       });
@@ -21,7 +21,7 @@ function Section() {
 
   const deleteSection = (id) => {
     axios
-      .delete(`http://localhost/react_api/Section/section_delete.php?id=${id}`)
+      .delete(`${global.config.apiUrl}section/delete/${id}`)
       .then(function (response) {
         getDatas();
       });
@@ -36,7 +36,7 @@ function Section() {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post("http://localhost/react_api/Section/section_create.php", inputs)
+      .post(`${global.config.apiUrl}section/create`, inputs)
       .then(function (response) {
         console.log(response.data);
         getDatas();
@@ -53,13 +53,15 @@ function Section() {
 
   /* for update */
 
-  function getSingleSection(id) {
-    document.getElementById("modelbutton").click();
-    axios
-      .get(`http://localhost/react_api/Section/Section_edit.php?id=${id}`)
-      .then(function (response) {
-        setInputs(response.data);
-      });
+  function getSingleSection(d) {
+    document.getElementById( "modelbutton" ).click();
+    setInputs( d );
+    setInputs( ( values ) => ( { ...values } ) );
+    // axios
+    //   .get(`http://localhost/react_api/Section/Section_edit.php?id=${id}`)
+    //   .then(function (response) {
+    //     setInputs(response.data);
+    //   });
   }
 
   return (
@@ -67,7 +69,7 @@ function Section() {
       <div className="container">
         <div className="row">
           <Sidebar />
-          <div className="col-10">
+          <div className="col-md-9">
             <h1 className="text-center">
               <small>Section List</small>
             </h1>
@@ -101,7 +103,7 @@ function Section() {
                         <a
                           href="javascript:void(0)"
                           className="btn btn-primary m-2 px-4"
-                          onClick={() => getSingleSection(d.id)}
+                          onClick={() => getSingleSection(d)}
                         >
                           Edit
                         </a>

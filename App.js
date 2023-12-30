@@ -25,9 +25,11 @@ import Subject from "./components/Admin/Subject/subject";
 import Attendance from "./components/Admin/Attendance/attendance_create";
 import Contact_list from "./components/Admin/Contact/contact_list";
 import Routine from "./components/Admin/Routine/routine_list";
+import Routine_create from "./components/Admin/Routine/routine_create";
+import Exam from "./components/Admin/Exam/exam";
 
-
-
+import Result from "./components/Admin/Result/result_list";
+import Result_create from "./components/Admin/Result/result_create";
 
 function App() {
   const [isSignedIn, setIssignedIn] = useState(() => {
@@ -63,8 +65,7 @@ function App() {
             </Protected>
           }
         />
-       
-        
+
         <Route
           path={"/class"}
           element={
@@ -93,7 +94,7 @@ function App() {
           path={"/subject"}
           element={
             <Protected isSignedIn={isSignedIn}>
-             <Subject/>
+              <Subject />
             </Protected>
           }
         />
@@ -101,7 +102,7 @@ function App() {
           path={"/attendance"}
           element={
             <Protected isSignedIn={isSignedIn}>
-             <Attendance/>
+              <Attendance />
             </Protected>
           }
         />
@@ -109,7 +110,7 @@ function App() {
           path={"/user"}
           element={
             <Protected isSignedIn={isSignedIn}>
-              <Contact_list/>
+              <Contact_list />
             </Protected>
           }
         />
@@ -117,11 +118,42 @@ function App() {
           path={"/routine"}
           element={
             <Protected isSignedIn={isSignedIn}>
-              <Routine/>
+              <Routine />
             </Protected>
           }
         />
-       
+        <Route
+          path={"/routine_create"}
+          element={
+            <Protected isSignedIn={isSignedIn}>
+              <Routine_create />
+            </Protected>
+          }
+        />
+        <Route
+          path={"/exam"}
+          element={
+            <Protected isSignedIn={isSignedIn}>
+              <Exam />
+            </Protected>
+          }
+        />
+        <Route
+          path={"/result_create"}
+          element={
+            <Protected isSignedIn={isSignedIn}>
+              <Result_create/>
+            </Protected>
+          }
+        />
+        <Route
+          path={"/result"}
+          element={
+            <Protected isSignedIn={isSignedIn}>
+              <Result />
+            </Protected>
+          }
+        />
       </Routes>
     </div>
   );

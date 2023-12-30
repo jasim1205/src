@@ -65,7 +65,7 @@ function Teachers() {
                 >
                   <img
                     className="img-fluid w-100"
-                    src={teacher.image}
+                    src={global.config.apiUrl + teacher.image}
                     alt={teacher.name}
                   />
                   <div className="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">

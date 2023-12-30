@@ -13,7 +13,7 @@ function Subject() {
   }, []);
   function getDatas() {
     axios
-      .get("http://localhost/react_api/Subject/subject_list.php")
+      .get(`${global.config.apiUrl}subject`)
       .then(function (response) {
         setSubject(response.data.data);
       });
@@ -21,7 +21,7 @@ function Subject() {
 
   const deleteSubject = (id) => {
     axios
-      .delete(`http://localhost/react_api/Subject/subject_delete.php?id=${id}`)
+      .delete(`${global.config.apiUrl}subject/delete/${id}`)
       .then(function (response) {
         getDatas();
       });
@@ -36,7 +36,7 @@ function Subject() {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post("http://localhost/react_api/Subject/subject_create.php", inputs)
+      .post(`${global.config.apiUrl}subject/create`, inputs)
       .then(function (response) {
         console.log(response.data);
         getDatas();
@@ -53,13 +53,16 @@ function Subject() {
 
   /* for update */
 
-  function getSingleSubject(id) {
-    document.getElementById("modelbutton").click();
-    axios
-      .get(`http://localhost/react_api/Subject/subject_edit.php?id=${id}`)
-      .then(function (response) {
-        setInputs(response.data);
-      });
+  function getSingleSubject(d) {
+    document.getElementById( "modelbutton" ).click();
+    setInputs(d);
+    setInputs((values) => ({ ...values }));
+    
+    // axios
+    //   .get(`http://localhost/react_api/Subject/subject_edit.php?id=${id}`)
+    //   .then(function (response) {
+    //     setInputs(response.data);
+    //   });
   }
 
   return (
@@ -67,7 +70,7 @@ function Subject() {
       <div className="container">
         <div className="row">
           <Sidebar />
-          <div className="col-10">
+          <div className="col-md-9">
             <h1 className="text-center">
               <small>Subject List</small>
             </h1>
@@ -101,7 +104,7 @@ function Subject() {
                         <a
                           href="javascript:void(0)"
                           className="btn btn-primary m-2 px-4"
-                          onClick={() => getSingleSubject(d.id)}
+                          onClick={() => getSingleSubject(d)}
                         >
                           Edit
                         </a>

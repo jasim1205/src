@@ -330,7 +330,7 @@ const Home = () => {
                                     className="position-relative overflow-hidden mb-4"
                                     style={{ borderRadius: '100%' }}
                                 >
-                                    <img className="img-fluid w-100" src={hometeacher.image} alt="" />
+                                    <img className="img-fluid w-100" src={global.config.apiUrl + hometeacher.image} alt="" />
                                     <div
                                         className="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute"
                                     >

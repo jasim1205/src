@@ -13,30 +13,26 @@ export default function Student() {
     getDatas();
   }, []);
   function getDatas() {
-    axios
-      .get("http://localhost/react_api/Student/student_list.php")
-      .then(function (response) {
-        setStudents(response.data.data);
-      });
+    axios.get(`${global.config.apiUrl}student`).then(function (response) {
+      setStudents(response.data.data);
+    });
   }
   function getClasses() {
     axios
-      .get("http://localhost/react_api/Classes/classes_list.php")
+      .get(`${global.config.apiUrl}classes`)
       .then(function (response) {
         setClasses(response.data.data);
       });
   }
   function getSections() {
-    axios
-      .get("http://localhost/react_api/Section/section_list.php")
-      .then(function (response) {
-        setSection(response.data.data);
-      });
+    axios.get(`${global.config.apiUrl}section`).then(function (response) {
+      setSection(response.data.data);
+    });
   }
 
   const deleteStudent = (id) => {
     axios
-      .delete(`http://localhost/react_api/Student/student_delete.php?id=${id}`)
+      .delete(`${global.config.apiUrl}student/delete/${id}`)
       .then(function (response) {
         getDatas();
       });
@@ -61,7 +57,7 @@ export default function Student() {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post("http://localhost/react_api/Student/student_create.php", inputs)
+      .post(`${global.config.apiUrl}student/create`, inputs)
       .then(function (response) {
         console.log( response.data );
         getDatas();
@@ -88,22 +84,27 @@ export default function Student() {
 
   /* for update */
 
-  function getSingleStudent(id) {
-    document.getElementById("modelbutton").click();
-    axios
-      .get(`http://localhost/react_api/Student/student_edit.php?id=${id}`)
-      .then(function (response) {
-        setInputs(response.data);
-        setInputs((values) => ({ ...values, image: "" }));
-      });
-  }
+  // function getSingleStudent(id) {
+  //   document.getElementById("modelbutton").click();
+  //   axios
+  //     .get(`http://localhost/react_api/Student/student_edit.php?id=${id}`)
+  //     .then(function (response) {
+  //       setInputs(response.data);
+  //       setInputs((values) => ({ ...values, image: "" }));
+  //     });
+  // }
+   function getSingleStudent(d) {
+     document.getElementById("modelbutton").click();
+     setInputs(d);
+     setInputs((values) => ({ ...values, image: "" }));
+   }
 
   return (
     <div>
       <div className="container">
         <div className="row">
           <Sidebar />
-          <div className="col-10">
+          <div className="col-md-9">
             <h1 className="text-center">
               <small>Student List</small>
             </h1>
@@ -143,7 +144,7 @@ export default function Student() {
                       <td>{d.name}</td>
                       <td>{d.batch_id}</td>
                       <td>
-                        <img src={d.image} alt="" width={50} />
+                        <img src={global.config.apiUrl + d.image} alt="" width={50} />
                       </td>
                       <td>{d.father_name}</td>
                       <td>{d.mother_name}</td>
@@ -155,7 +156,7 @@ export default function Student() {
                         <a
                           href="javascript:void(0)"
                           className="btn btn-primary mb-1 px-4"
-                          onClick={() => getSingleStudent(d.id)}
+                          onClick={() => getSingleStudent(d)}
                         >
                           Edit
                         </a>

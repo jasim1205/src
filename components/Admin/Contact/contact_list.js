@@ -30,7 +30,7 @@ function Contact_list ()
       <div className="container">
         <div className="row">
           <Sidebar />
-          <div className="col-10">
+          <div className="col-md-10">
             <h1 className="text-center">
               <small>User Message List</small>
             </h1>

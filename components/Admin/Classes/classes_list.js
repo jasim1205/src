@@ -4,6 +4,8 @@ import axios from "axios";
 import Footer from "../Layout/footer";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../Layout/sidebar";
+import { flushSync } from "react-dom";
+import { valHooks } from "jquery";
 function ClassList() {
   const navigate = useNavigate();
   const [classes, setClasses] = useState([]);
@@ -13,7 +15,7 @@ function ClassList() {
   }, []);
   function getDatas() {
     axios
-      .get("http://localhost/react_api/Classes/classes_list.php")
+      .get(`${global.config.apiUrl}classes`)
       .then(function (response) {
         setClasses(response.data.data);
       });
@@ -21,7 +23,7 @@ function ClassList() {
 
   const deleteClasses = (id) => {
     axios
-      .delete(`http://localhost/react_api/Classes/classes_delete.php?id=${id}`)
+      .delete(`${global.config.apiUrl}classes/delete/${id}`)
       .then(function (response) {
         getDatas();
       });
@@ -36,7 +38,7 @@ function ClassList() {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post("http://localhost/react_api/Classes/classes_create.php", inputs)
+      .post(`${global.config.apiUrl}classes/create`, inputs)
       .then(function (response) {
         console.log( response.data );
         getDatas();
@@ -53,13 +55,19 @@ function ClassList() {
 
   /* for update */
 
-  function getSingleClasses(id) {
-    document.getElementById("modelbutton").click();
-    axios
-      .get(`http://localhost/react_api/Classes/classes_edit.php?id=${id}`)
-      .then(function (response) {
-        setInputs(response.data);
-      });
+  // function getSingleClasses(id) {
+  //   document.getElementById("modelbutton").click();
+  //   axios
+  //     .get(`http://localhost/react_api/Classes/classes_edit.php?id=${id}`)
+  //     .then(function (response) {
+  //       setInputs(response.data);
+  //     });
+  // }
+  function getSingleClasses ( d )
+  {
+    document.getElementById( 'modelbutton' ).click();
+    setInputs( d );
+    setInputs((values)=>({...values}))
   }
 
   return (
@@ -67,7 +75,7 @@ function ClassList() {
       <div className="container">
         <div className="row">
           <Sidebar />
-          <div className="col-10">
+          <div className="col-md-9">
             <h1 className="text-center">
               <small>Classes List</small>
             </h1>
@@ -101,7 +109,7 @@ function ClassList() {
                         <a
                           href="javascript:void(0)"
                           className="btn btn-primary m-2 px-4"
-                          onClick={() => getSingleClasses(d.id)}
+                          onClick={() => getSingleClasses(d)}
                         >
                           Edit
                         </a>

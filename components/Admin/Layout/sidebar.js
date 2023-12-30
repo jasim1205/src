@@ -1,4 +1,4 @@
-import {React} from "react";
+import { React } from "react";
 import "./layout.css";
 
 import { useState } from "react";
@@ -6,10 +6,14 @@ import { useState } from "react";
 function Sidebar() {
   const userLogged = JSON.parse(localStorage.getItem("userdata"));
   return (
-    <div className="col-2">
+    <div className="col-md-2">
       <div className="dashboard-sidebar">
         <div className="dashboard-user-image">
-          <img src={`http://localhost/react_api/${userLogged.image}`} alt="" />
+          <img
+            width={50}
+            src={`${global.config.apiUrl}${userLogged.image}`}
+            alt=""
+          />
         </div>
         <a className="navbar-brand" href="#">
           {userLogged.name}
@@ -21,7 +25,7 @@ function Sidebar() {
         <a href="./" className="dashboard-nav-link">
           Home
         </a>
-        <a href="./user" className="dashboard-nav-link">
+        {/* <a href="./user" className="dashboard-nav-link">
           User
         </a>
         <a href="./teacher" className="dashboard-nav-link">
@@ -45,6 +49,9 @@ function Sidebar() {
         <a href="./routine" className="dashboard-nav-link">
           Routine
         </a>
+        <a href="./exam" className="dashboard-nav-link">
+          Exam
+        </a> */}
       </div>
     </div>
   );

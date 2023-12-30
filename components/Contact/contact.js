@@ -17,7 +17,8 @@ function Contact() {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post("http://localhost/react_api/create_user.php", inputs)
+      // .post("http://localhost/react_api/create_user.php", inputs)
+      .post(`${global.config.apiUrl}user/create`, inputs)
       .then(function (response) {
         console.log(response.data);
         window.alert("Form submitted successfully!");

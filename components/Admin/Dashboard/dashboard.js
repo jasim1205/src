@@ -18,7 +18,7 @@ function Dashboard() {
         <div className="row">
           <Sidebar />
 
-          <div className="col-9">
+          <div className="col-md-9 col-sm-12">
             <h1 className="text-center mt-5">Welcome to Admin Dashboard</h1>
 
             <div className="container justify-conten-center mt-5 ml-5">
@@ -42,7 +42,35 @@ function Dashboard() {
                   Student
                 </a>
               </div>
+
               <div className="row mt-5">
+                <a
+                  href="./result"
+                  className="col-3 text-white text-center dash9 mx-3"
+                >
+                  Result
+                </a>
+
+                <a
+                  href="./attendance"
+                  className="col-3 text-white text-center dash8 mx-3"
+                >
+                  Attendance
+                </a>
+                <a
+                  href="./routine"
+                  className="col-3 text-white text-center dash9 mx-3"
+                >
+                  Routine
+                </a>
+              </div>
+              <div className="row mt-5">
+                <a
+                  href="./result_create"
+                  className="col-3 text-white text-center dash9 mx-3"
+                >
+                  Result_create
+                </a>
                 <a
                   href="./class"
                   className="col-3 text-white text-center dash4 mx-3"
@@ -55,31 +83,27 @@ function Dashboard() {
                 >
                   Subject
                 </a>
+              </div>
+
+              <div className="row mt-5">
+                
                 <a
                   href="./section"
                   className="col-3 text-white text-center dash6 mx-3"
                 >
                   Section
                 </a>
-              </div>
-              <div className="row mt-5">
+                <a
+                  href="./exam"
+                  className="col-3 text-white text-center dash9 mx-3"
+                >
+                  Exam
+                </a>
                 <a
                   href="./user"
                   className="col-3 text-white text-center dash7 mx-3"
                 >
                   User Message
-                </a>
-                <a
-                  href="./attendance"
-                  className="col-3 text-white text-center dash8 mx-3"
-                >
-                  Attendance
-                </a>
-                <a
-                  href="./admin/routine"
-                  className="col-3 text-white text-center dash9 mx-3"
-                >
-                  Routine
                 </a>
               </div>
             </div>
